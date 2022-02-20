@@ -1,0 +1,7 @@
+{
+    "files.exclude": {
+        ".github/**": true,
+        "README.md": true,
+        "yarn.lock": true
+    }
+}
