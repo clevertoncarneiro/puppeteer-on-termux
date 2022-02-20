@@ -38,12 +38,10 @@ function checkarguments() {
         if (process.argv[2].length < 5) {
             throw Error('Missing path argument to save source.');
         }
-        else if(process.argv[3].length < 5)
-        {
+        else if (process.argv[3].length < 5) {
             throw Error('Missing url.');
         }
-        else if(process.argv[4] < 3)
-        {
+        else if (process.argv[4] < 3) {
             throw Error('Time too short! (< 3 secs)');
         }
     } catch (error) {
@@ -54,9 +52,13 @@ function checkarguments() {
 async function mainloop(url, waittime) {
     checkarguments();
 
-    while (true) {
-        await wait(waittime);
-        sourcecode(url);//.then(() => console.log('source saved'));
+    try {
+        while (true) {
+            await wait(waittime);
+            sourcecode(url);//.then(() => console.log('source saved'));
+        }
+    } catch (error) {
+        console.log('Cannot access given url, retrying ...');
     }
 }
 
