@@ -38,8 +38,16 @@ function checkarguments() {
         if (process.argv[2].length < 5) {
             throw Error('Missing path argument to save source.');
         }
+        else if(process.argv[3].length < 5)
+        {
+            throw Error('Missing url.');
+        }
+        else if(process.argv[4] < 3)
+        {
+            throw Error('Time too short! (< 3 secs)');
+        }
     } catch (error) {
-        throw Error('Missing path argument to save source.');
+        throw Error('Missing arguments!');
     }
 }
 
@@ -53,6 +61,6 @@ async function mainloop(url, waittime) {
 }
 
 
-
+// 'https://www.pelando.com.br/recentes'
 // mainloop(website, seconds)
-mainloop('https://www.pelando.com.br/recentes', 20);
+mainloop(process.argv[3], process.argv[4]);
