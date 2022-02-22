@@ -1,5 +1,20 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
+const { Console } = require("console"); // get the Console class
+
+
+// make a new logger
+const Logger = new Console({
+    stdout: fs.createWriteStream("normalStdout.txt"),
+    stderr: fs.createWriteStream("errStdErr.txt"),
+});
+
+// saving to normalStdout.txt file
+//Logger.log("This will be saved in normalStdout.txt file");
+
+// saving to errStdErr.txt file
+//Logger.error("This will be saved in errStdErr.txt file");
+
 
 async function sourcecode(url) {
     const browser = await puppeteer.launch({
@@ -58,7 +73,8 @@ async function mainloop(url, waittime) {
             sourcecode(url);//.then(() => console.log('source saved'));
         }
     } catch (error) {
-        console.log('Cannot access given url, retrying ...');
+        console.log(error);
+        Logger.error(error);
     }
 }
 
